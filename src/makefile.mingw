@@ -7,13 +7,14 @@ USE_UPNP:=0
 INCLUDEPATHS= \
  -I"C:\deps\boost_1_55_0" \
  -I"C:\deps\db-4.8.30.NC\build_unix" \
- -I"C:\deps\openssl-1.0.1g\include"
+ -I"C:\deps\openssl-1.0.2k\include"
 
 LIBPATHS= \
  -L"C:\deps\boost_1_55_0\stage\lib" \
  -L"C:\deps\db-4.8.30.NC\build_unix" \
- -L"C:\deps\openssl-1.0.1g"
-
+ -L"C:\deps\openssl-1.0.2k" \
+ -L"C:\Spacecash\src\leveldb"
+ 
 LIBS= \
  -l leveldb \
  -l boost_system-mgw49-mt-s-1_55 \
