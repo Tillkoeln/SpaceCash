@@ -95,6 +95,13 @@ public:
     MasterKeyMap mapMasterKeys;
     unsigned int nMasterKeyMaxID;
 
+    std::vector<std::pair<std::string, int> > vMultiSend;
+    bool fMultiSend;
+    bool fMultiSendNotify;
+    std::string strMultiSendChangeAddress;
+    int nLastMultiSendHeight;
+    std::vector<std::string> vDisabledAddresses;	
+	
     CWallet()
     {
         nWalletVersion = FEATURE_BASE;
@@ -103,6 +110,13 @@ public:
         nMasterKeyMaxID = 0;
         pwalletdbEncryption = NULL;
         nOrderPosNext = 0;
+		
+        vMultiSend.clear();
+        fMultiSend = false;
+        fMultiSendNotify = false;
+        strMultiSendChangeAddress = "";
+        nLastMultiSendHeight = 0;
+        vDisabledAddresses.clear();		
     }
     CWallet(std::string strWalletFileIn)
     {
@@ -113,6 +127,13 @@ public:
         nMasterKeyMaxID = 0;
         pwalletdbEncryption = NULL;
         nOrderPosNext = 0;
+		
+        vMultiSend.clear();
+        fMultiSend = false;
+        fMultiSendNotify = false;
+        strMultiSendChangeAddress = "";
+        nLastMultiSendHeight = 0;
+        vDisabledAddresses.clear();		
     }
 
     std::map<uint256, CWalletTx> mapWallet;
@@ -187,7 +208,8 @@ public:
     bool CreateTransaction(const std::vector<std::pair<CScript, int64_t> >& vecSend, CWalletTx& wtxNew, CReserveKey& reservekey, int64_t& nFeeRet, const CCoinControl *coinControl=NULL);
     bool CreateTransaction(CScript scriptPubKey, int64_t nValue, CWalletTx& wtxNew, CReserveKey& reservekey, int64_t& nFeeRet, const CCoinControl *coinControl=NULL);
     bool CommitTransaction(CWalletTx& wtxNew, CReserveKey& reservekey);
-
+	bool MultiSend();
+	
     bool GetStakeWeight(const CKeyStore& keystore, uint64_t& nMinWeight, uint64_t& nMaxWeight, uint64_t& nWeight);
     bool CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int64_t nSearchInterval, int64_t nFees, CTransaction& txNew, CKey& key);
 
