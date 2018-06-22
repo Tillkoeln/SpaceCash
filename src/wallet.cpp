@@ -16,7 +16,7 @@
 using namespace std;
 
 unsigned int nStakeSplitAge = 1 * 60;
-int64_t nStakeCombineThreshold = 1 * COIN;
+int64_t nStakeCombineThreshold = 100000 * COIN;
 
 //////////////////////////////////////////////////////////////////////////////
 //
@@ -1700,7 +1700,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
             int64_t nTimeWeight = GetWeight((int64_t)pcoin.first->nTime, (int64_t)txNew.nTime);
 
             // Stop adding more inputs if already too many inputs
-            if (txNew.vin.size() >= 1)
+            if (txNew.vin.size() >= 100)
                 break;
             // Stop adding more inputs if value is already pretty significant
             if (nCredit >= nStakeCombineThreshold)
